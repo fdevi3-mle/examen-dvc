@@ -8,7 +8,7 @@ from src.data.get_data import import_raw_data
 from src.utils import ExtensionMethods, RAW_DATA_PATH, PROCESSED_DATA_PATH, RAW_FILE_DATA_PATH
 
 
-def main(input_filepath=RAW_FILE_DATA_PATH, output_path=PROCESSED_DATA_PATH):
+def data_splitter(input_filepath=RAW_FILE_DATA_PATH, output_path=PROCESSED_DATA_PATH):
     ##import the data
     if not os.path.exists(input_filepath):
         input_filepath = import_raw_data()
@@ -21,20 +21,21 @@ def main(input_filepath=RAW_FILE_DATA_PATH, output_path=PROCESSED_DATA_PATH):
     os.makedirs(output_path,exist_ok=True) ##makes it if it doesnt exist
 
     # Save dataframes to their respective output file paths
-    save_dataframes(X_train, X_test, y_train, y_test, output_path)
-
-
-
+    a = save_dataframes(X_train, X_test, y_train, y_test, output_path)
+    return a ## cant be bothered
 
 
 def save_dataframes(X_train, X_test, y_train, y_test, output_folderpath):
     # Save dataframes to their respective output file paths
     ##make it if doesnt exist
+    dic = {}
     os.makedirs(output_folderpath,exist_ok=True) ##
     for file, filename in zip([X_train, X_test, y_train, y_test], ['X_train', 'X_test', 'y_train', 'y_test']):
         output_filepath = os.path.join(output_folderpath, f'{filename}.csv')
+        dic[filename]  = output_filepath
         if ExtensionMethods.check_existing_folder(output_filepath):
             file.to_csv(output_filepath, index=False)
+    return dic
 
 
 def split_data(df):
@@ -47,4 +48,4 @@ def split_data(df):
 
 
 if __name__ == '__main__':
-    main()
+    data_splitter()

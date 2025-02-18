@@ -6,7 +6,13 @@ ROOT_PATH = os.path.dirname(CURRENT_PATH)
 DATA_PATH =  os.path.join(ROOT_PATH, 'data')
 RAW_DATA_PATH= os.path.join(DATA_PATH, 'raw_data')
 RAW_FILE_DATA_PATH = os.path.join(RAW_DATA_PATH,'raw.csv')
+
 PROCESSED_DATA_PATH = os.path.join(DATA_PATH, 'processed_data')
+X_TRAIN_FILE_DATA_PATH = os.path.join(PROCESSED_DATA_PATH,'X_train.csv')
+X_TRAIN_SCALED_FILE_DATA_PATH =os.path.join(PROCESSED_DATA_PATH,'X_train_scaled.csv')
+
+X_TEST_FILE_DATA_PATH = os.path.join(PROCESSED_DATA_PATH,'X_test.csv')
+X_TEST_SCALED_FILE_DATA_PATH =os.path.join(PROCESSED_DATA_PATH,'X_test_scaled.csv')
 
 MODEL_PATH =  os.path.join(ROOT_PATH,'models')
 NOTEBOOK_PATH = os.path.join(ROOT_PATH, 'notebooks')
