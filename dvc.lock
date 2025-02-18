@@ -78,7 +78,7 @@ stages:
     outs:
     - path: models/best_grid_search_parameters.pkl
       hash: md5
-      md5: 47bbe019746edca6bfab91c852c50f1b
+      md5: 646b4d805ddfa4046209f30169106ab8
       size: 47
   model_training:
     cmd: python src/models/model_training.py
@@ -101,7 +101,7 @@ stages:
       size: 24317
     - path: models/best_grid_search_parameters.pkl
       hash: md5
-      md5: 47bbe019746edca6bfab91c852c50f1b
+      md5: 646b4d805ddfa4046209f30169106ab8
       size: 47
     - path: src/models/model_training.py
       hash: md5
@@ -110,8 +110,8 @@ stages:
     outs:
     - path: models/random_forest.pkl
       hash: md5
-      md5: 204265a4e314c956ccf4cac98d9391be
-      size: 44401
+      md5: 5d37052b0600d9c518746db516a47ff9
+      size: 11629057
   model_evaluate:
     cmd: python src/models/model_evaluate.py
     deps:
@@ -133,9 +133,14 @@ stages:
       size: 24317
     - path: models/random_forest.pkl
       hash: md5
-      md5: 204265a4e314c956ccf4cac98d9391be
-      size: 44401
+      md5: 5d37052b0600d9c518746db516a47ff9
+      size: 11629057
     - path: src/models/model_evaluate.py
       hash: md5
       md5: 3acc09ca65bc348c4156176e836e4369
       size: 2378
+    outs:
+    - path: metrics/metrics.json
+      hash: md5
+      md5: 4f36598482252cb197b54a7d6b2cd139
+      size: 52

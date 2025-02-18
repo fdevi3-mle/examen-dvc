@@ -52,3 +52,7 @@ stages:
       - data/processed_data/y_test.csv
       - models/random_forest.pkl
       - src/models/model_evaluate.py
+    metrics:
+      - metrics/metrics.json:
+          cache: false
+
