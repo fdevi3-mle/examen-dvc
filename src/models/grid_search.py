@@ -37,7 +37,7 @@ def grid_search_please(X_train_scaled_file=X_TRAIN_SCALED_FILE_DATA_PATH,
     X_test_scaled  = import_dataset(X_test_scaled_file)
 
     model = RandomForestRegressor()
-    param_grid = {'n_estimators': [5, 10, 20], 'max_depth': [1,2,5,10,20]}
+    param_grid = {'n_estimators': [5, 100, 200], 'max_depth': [1,2,5,10,20]}
 
     #Since they ask for metrics for mse and r2 might as wekk use r2
     grid_search = GridSearchCV(model, param_grid, cv=3, scoring='r2', n_jobs=-1)
