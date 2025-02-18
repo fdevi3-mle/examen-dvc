@@ -1,8 +1,54 @@
 stages:
-  prepare:
-    cmd: python src/data/make_dataset.py
+  data_splitter:
+    cmd: python src/data/data_splitter.py
     deps:
-    - data/raw
-    - src/data/make_dataset.py
+      - data/raw_data/raw.csv
+      - src/data/data_splitter.py
     outs:
-    - data/preprocessed
+      - data/processed_data/X_train.csv
+      - data/processed_data/X_test.csv
+      - data/processed_data/y_train.csv
+      - data/processed_data/y_test.csv
+
+  data_normal:
+    cmd: python src/data/data_normal.py
+    deps:
+      - data/processed_data/X_train.csv
+      - data/processed_data/X_test.csv
+      - src/data/data_normal.py
+    outs:
+      - data/processed_data/X_train_scaled.csv
+      - data/processed_data/X_test_scaled.csv
+
+  grid_search:
+    cmd: python src/models/grid_search.py
+    deps:
+      - data/processed_data/X_train_scaled.csv
+      - data/processed_data/X_test_scaled.csv
+      - data/processed_data/y_train.csv
+      - data/processed_data/y_test.csv
+      - src/models/grid_search.py
+    outs:
+      - models/best_grid_search_parameters.pkl
+
+  model_training:
+    cmd: python src/models/model_training.py
+    deps:
+      - data/processed_data/X_train_scaled.csv
+      - data/processed_data/X_test_scaled.csv
+      - data/processed_data/y_train.csv
+      - data/processed_data/y_test.csv
+      - models/best_grid_search_parameters.pkl
+      - src/models/model_training.py
+    outs:
+      - models/random_forest.pkl
+
+  model_evaluate:
+    cmd: python src/models/model_evaluate.py
+    deps:
+      - data/processed_data/X_train_scaled.csv
+      - data/processed_data/X_test_scaled.csv
+      - data/processed_data/y_train.csv
+      - data/processed_data/y_test.csv
+      - models/random_forest.pkl
+      - src/models/model_evaluate.py
